@@ -9,6 +9,9 @@ package com.opengg.test;
 import com.opengg.core.engine.GGApplication;
 import com.opengg.core.engine.NetworkEngine;
 import com.opengg.core.engine.OpenGG;
+import com.opengg.core.math.Vector3f;
+import com.opengg.core.world.components.WorldObject;
+import com.opengg.core.world.components.physics.PhysicsComponent;
 
 /**
  *
@@ -25,6 +28,11 @@ public class GGServer extends GGApplication{
 
     @Override
     public void setup() {
+        WorldObject wo = new WorldObject();
+        wo.attach(new PhysicsComponent());
+        OpenGG.curworld.attach(wo);
+        wo.pos = new Vector3f(0,10000,0);
+        
         NetworkEngine.initializeServer("TestServer", 25565);
     }
 

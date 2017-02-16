@@ -30,7 +30,9 @@ public class GGClient  extends GGApplication{
     }
 
     @Override
-    public void update() {}
+    public void update() {
+        System.out.println(OpenGG.curworld.getChildren().get(0).pos.y);
+    }
 
     @Override
     public void render() {}
