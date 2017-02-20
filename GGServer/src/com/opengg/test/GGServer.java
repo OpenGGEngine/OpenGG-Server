@@ -10,6 +10,8 @@ import com.opengg.core.engine.GGApplication;
 import com.opengg.core.engine.NetworkEngine;
 import com.opengg.core.engine.OpenGG;
 import com.opengg.core.math.Vector3f;
+import com.opengg.core.online.server.Server;
+import com.opengg.core.world.components.ModelRenderComponent;
 import com.opengg.core.world.components.WorldObject;
 import com.opengg.core.world.components.physics.PhysicsComponent;
 
@@ -25,19 +27,24 @@ public class GGServer extends GGApplication{
     public static void main(String[] args) {
         OpenGG.initializeHeadless(new GGServer());
     }
+    private WorldObject wo;
 
     @Override
     public void setup() {
-        WorldObject wo = new WorldObject();
+        wo = new WorldObject();
         wo.attach(new PhysicsComponent());
+        wo.attach(ModelRenderComponent.getFramework("Model"));
         OpenGG.curworld.attach(wo);
-        wo.pos = new Vector3f(0,10000,0);
+        ///wo.pos = new Vector3f(0,10000,0);
         
-        NetworkEngine.initializeServer("TestServer", 25565);
+        Server s = NetworkEngine.initializeServer("TestServer", 25565);
     }
 
     @Override
     public void update() {
+        if(Math.random() > 0.95){
+            wo.pos = new Vector3f(0,5,0);
+        }
     }
 
     @Override
